@@ -1,6 +1,6 @@
-# Repo Specifc Details
+# Repo Specific Details
 
-An app to be used with a touchscreen mobile device to gather psychometric intensity data on 3D models like hands, feet and other body parts.
+An app to be used with a touchscreen mobile device to gather psychometric intensity data on 3D models like hands, feet, and other body parts.
 
 # Unity Project Setup (PLEASE READ)
 
