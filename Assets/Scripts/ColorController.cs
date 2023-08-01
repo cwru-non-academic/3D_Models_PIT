@@ -73,4 +73,9 @@ public class ColorController : MonoBehaviour
     {
         pen = usingPen;
     }
+
+    public bool getPen()
+    {
+        return pen;
+    }
 }

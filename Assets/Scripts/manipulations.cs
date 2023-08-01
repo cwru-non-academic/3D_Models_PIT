@@ -7,22 +7,45 @@ public class manipulations : MonoBehaviour
 {
     [SerializeField] private GameObject cameraHolder;
     [SerializeField] private GameObject cameraView;
-    public float scale { get; set; }
-    public float xRotation { get; set; }
-    public float yRotation { get; set; }
-    public float zRotation { get; set; }
-    private Vector3 cameraOriginalPosition;
+    public bool move { get; set; } //bool to set if movement option is selected
+    public bool rotate { get; set; } // bool to set if rotation option is selected. Only one (move or rotate) can be true at once.
+    public float mouseScaling;
+    public float scrollScaling;
+    public float movementScaling;
+    public float rotationScaling;
+
+    private Vector3 currentRotation; //holds chnages in rotation
+    private Vector3 currentPosition; //holds chnages in position
+    private Vector3 cameraOriginalPosition; // holds the original cmaera position for reset functions
+
+
     // Start is called before the first frame update
     void Start()
     {
+        //initialize variables
+        rotate = true;
+        move = false;
         cameraOriginalPosition = cameraView.transform.localPosition;
+        currentPosition = new Vector3(0, 0, 0);
+        currentRotation = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        cameraView.transform.localPosition = new Vector3(cameraOriginalPosition.x, cameraOriginalPosition.y+scale , cameraOriginalPosition.z);
-        cameraHolder.transform.localEulerAngles = new Vector3(xRotation, yRotation, zRotation);
+        if (Input.GetMouseButton(1) || Input.mouseScrollDelta.y !=0)
+        {
+            if (move) //assign detected mouse movement to move or rotate if applicable
+            {
+                currentPosition = currentPosition + new Vector3( Input.GetAxis("Mouse Y") * mouseScaling,Input.mouseScrollDelta.y * scrollScaling, Input.GetAxis("Mouse X") * mouseScaling) * movementScaling;
+            }
+            else if (rotate)
+            {
+                currentRotation = currentRotation + new Vector3(Input.GetAxis("Mouse X") * mouseScaling*-1, Input.GetAxis("Mouse Y") * mouseScaling, Input.mouseScrollDelta.y * scrollScaling) * rotationScaling;
+            }
+        }
+        cameraView.transform.localPosition = cameraOriginalPosition + currentPosition;
+        cameraHolder.transform.localEulerAngles = currentRotation;
     }
 
     
