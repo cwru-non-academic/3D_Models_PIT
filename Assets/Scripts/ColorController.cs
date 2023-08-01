@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class ColorController : MonoBehaviour
@@ -18,17 +17,13 @@ public class ColorController : MonoBehaviour
 
     void Update()
     {
-        if (Input.mousePresent && Input.GetMouseButton(0))
+        if (Input.mousePresent && Input.GetMouseButton(0) && !mouseOverUI())
         {
             RayCastHit(Camera.main.ScreenPointToRay(Input.mousePosition));
         }
         else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             RayCastHit(Camera.main.ScreenPointToRay(Input.GetTouch(0).position));
-        }
-
-        if (Input.GetKeyDown(KeyCode.R)){
-            tex.Apply();
         }
     }
 
@@ -77,5 +72,10 @@ public class ColorController : MonoBehaviour
     public bool getPen()
     {
         return pen;
+    }
+
+    private bool mouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }

@@ -17640,7 +17640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorWindow: {fileID: 457619180}
   manipulationScript: {fileID: 2127282231}
-  colorCTR: {fileID: 0}
+  colorCTR: {fileID: 1772934249}
   BGMove: {fileID: 413021221}
   HighMove: {fileID: 169672965}
   BGRotate: {fileID: 2017366608}
