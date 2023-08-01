@@ -21,7 +21,7 @@ public class manipulations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cameraView.transform.localPosition = new Vector3(cameraOriginalPosition.x, cameraOriginalPosition.y-scale , cameraOriginalPosition.z);
+        cameraView.transform.localPosition = new Vector3(cameraOriginalPosition.x, cameraOriginalPosition.y+scale , cameraOriginalPosition.z);
         cameraHolder.transform.localEulerAngles = new Vector3(xRotation, yRotation, zRotation);
     }
 
