@@ -1,11 +1,17 @@
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
+using Michsky.MUIP;
 
 public class toolbox : MonoBehaviour
 {
     [SerializeField] private GameObject colorWindow;
+    [SerializeField] private GameObject loadWindow;
+    [SerializeField] private TextMeshProUGUI loadLog;
+    [SerializeField] private TMP_InputField pathInput;
     [SerializeField] private manipulations manipulationScript;
     [SerializeField] private ColorController colorCTR;
+    [SerializeField] private ButtonManager loadBTN;
 
     //buton color backgrounds
     [SerializeField] private Image BGMove;
@@ -39,6 +45,11 @@ public class toolbox : MonoBehaviour
         colorWindow.SetActive(!colorWindow.activeSelf);
     }
 
+    public void toogleLoadWindow()
+    {
+        loadWindow.SetActive(!loadWindow.activeSelf);
+    }
+
     public void updateColors()
     {
         if (manipulationScript.move)
@@ -70,4 +81,18 @@ public class toolbox : MonoBehaviour
         }
     }
 
+    public void UpdateLoadLog( string log)
+    {
+        loadLog.text = log;
+    }
+
+    public string getPath()
+    {
+        return pathInput.text;
+    }
+
+    public void enableLoadBTN()
+    {
+        loadBTN.Interactable(true);
+    }
 }
