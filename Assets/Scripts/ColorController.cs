@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Text;
 using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ColorController : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class ColorController : MonoBehaviour
     private bool textureGrabed = false;
     private Mesh mesh;
     private Color[] colors;
+    private List<Color[]> memory;
     private bool pen = true;
+    private int memoryCount = -1;
 
     // logger
     private StringBuilder pitInfo;
@@ -23,7 +26,8 @@ public class ColorController : MonoBehaviour
 
     void Start()
     {
-
+        // create a empty memory list
+        memory = new List<Color[]>();
         //starts logger A:\Documents\Unity Projects\CurrentProject\3D_Models_PIT\PITLog__2023_08_04_01_09_38.txt
         pitInfo = new StringBuilder();
         if (!textureGrabed)
@@ -33,6 +37,8 @@ public class ColorController : MonoBehaviour
 
             // create new colors array where the colors will be created.
             colors = new Color[vertices.Length];
+            memory.Add((Color[])colors.Clone());
+            memoryCount++;
 
             textureGrabed = true;
         }
@@ -43,11 +49,29 @@ public class ColorController : MonoBehaviour
         if (Input.mousePresent && Input.GetMouseButton(0) && !mouseOverUI())
         {
             RayCastHit(Camera.main.ScreenPointToRay(Input.mousePosition));
-        }
-        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        } else if(Input.mousePresent && Input.GetMouseButtonUp(0) && !mouseOverUI())
         {
-            RayCastHit(Camera.main.ScreenPointToRay(Input.GetTouch(0).position));
+            Debug.Log("save");
+            //when click is release save trace
+            if (memoryCount < memory.Count - 1)
+            {
+                //overide history
+                memory[memoryCount + 1] = (Color[]) colors.Clone();
+                while (memory.Count-1 > memoryCount+1)
+                {
+                    memory.RemoveAt(memory.Count-1);
+                }
+            }
+            else
+            {
+                memory.Add((Color[]) colors.Clone());
+            }
+            memoryCount++;
         }
+        //else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        //{
+            //RayCastHit(Camera.main.ScreenPointToRay(Input.GetTouch(0).position));
+        //}
     }
 
     private void RayCastHit(Ray ray)
@@ -62,6 +86,8 @@ public class ColorController : MonoBehaviour
 
                 // create new colors array where the colors will be created.
                 colors = new Color[vertices.Length];
+                memory.Add((Color[])colors.Clone());
+                memoryCount++;
 
                 textureGrabed = true;
             }
@@ -81,7 +107,6 @@ public class ColorController : MonoBehaviour
 
             // assign the array of colors to the Mesh.
             mesh.colors = colors;
-
         }
     }
     
@@ -104,6 +129,26 @@ public class ColorController : MonoBehaviour
     {
         Debug.Log("Logging");
         StartCoroutine(logTrial()); 
+    }
+
+    public void undo()
+    {
+        if(memoryCount>0)
+        {
+            memoryCount--;
+            colors = (Color[]) memory[memoryCount].Clone();
+            mesh.colors = colors;
+        }   
+    }
+
+    public void redo()
+    {
+        if (memoryCount < memory.Count-1)
+        {
+            memoryCount++;
+            colors = (Color[])memory[memoryCount].Clone();
+            mesh.colors = colors;
+        }
     }
 
     IEnumerator logTrial()
