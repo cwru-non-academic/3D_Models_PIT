@@ -77,3 +77,6 @@ crashlytics-build.properties
 
 # MacOS hidden folder files
 .DS_Store
+
+# Pit log files
+PITLog_*.txt
