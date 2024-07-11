@@ -12,12 +12,14 @@ public class ColorController : MonoBehaviour
     [SerializeField] private MeshFilter modelMesh;
     [SerializeField] private colorPicker picker;
     [SerializeField] private toolbox tools;
+    [SerializeField] private int maxMemory;
 
     private bool textureGrabed = false;
     private Mesh mesh;
     private Color[] colors;
     private List<Color[]> memory;
     private bool pen = true;
+    private bool colorPresetsOn = true;
     private int memoryCount = -1;
 
     // logger
@@ -51,7 +53,6 @@ public class ColorController : MonoBehaviour
             RayCastHit(Camera.main.ScreenPointToRay(Input.mousePosition));
         } else if(Input.mousePresent && Input.GetMouseButtonUp(0) && !mouseOverUI())
         {
-            Debug.Log("save");
             //when click is release save trace
             if (memoryCount < memory.Count - 1)
             {
@@ -64,7 +65,12 @@ public class ColorController : MonoBehaviour
             }
             else
             {
-                memory.Add((Color[]) colors.Clone());
+                if (memory.Count > maxMemory)
+                {
+                    memory.RemoveAt(0);
+                    memoryCount--;
+                }
+                memory.Add((Color[])colors.Clone());
             }
             memoryCount++;
         }
@@ -118,6 +124,16 @@ public class ColorController : MonoBehaviour
     public bool getPen()
     {
         return pen;
+    }
+
+    public void setPresetsOn(bool on)
+    {
+        colorPresetsOn = on;
+    }
+
+    public bool getColorPresetsOn()
+    {
+        return colorPresetsOn;
     }
 
     private bool mouseOverUI()
