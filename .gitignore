@@ -80,3 +80,7 @@ crashlytics-build.properties
 
 # Pit log files
 PITLog_*.txt
+
+#Code assist
+/[Aa]ssets/[Pp]lugins/CodeAssist***
+

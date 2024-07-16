@@ -41,12 +41,22 @@ public class manipulations : MonoBehaviour
             }
             else if (rotate)
             {
-                currentRotation = currentRotation + new Vector3(Input.GetAxis("Mouse X") * mouseScaling*-1, Input.GetAxis("Mouse Y") * mouseScaling, Input.mouseScrollDelta.y * scrollScaling) * rotationScaling;
+                currentRotation = currentRotation + new Vector3(Input.GetAxis("Mouse X") * mouseScaling*-1,  Input.mouseScrollDelta.y * scrollScaling, Input.GetAxis("Mouse Y") * mouseScaling) * rotationScaling;
             }
         }
         cameraView.transform.localPosition = cameraOriginalPosition + currentPosition;
         cameraHolder.transform.localEulerAngles = currentRotation;
     }
 
+    public void flip()
+    {
+        currentRotation= new Vector3(currentRotation.x, currentRotation.y, currentRotation.z + 180.0f);
+        cameraHolder.transform.localEulerAngles = currentRotation;
+    }
     
+    public void resetView()
+    {
+        currentRotation = new Vector3(0, 0, 0);
+        cameraHolder.transform.localEulerAngles = currentRotation;
+    }
 }
