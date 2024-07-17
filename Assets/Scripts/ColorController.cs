@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
+using System;
 
 public class ColorController : MonoBehaviour
 {
@@ -28,20 +30,11 @@ public class ColorController : MonoBehaviour
 
     void Start()
     {
-        // create a empty memory list
-        memory = new List<Color[]>();
         //starts logger A:\Documents\Unity Projects\CurrentProject\3D_Models_PIT\PITLog__2023_08_04_01_09_38.txt
         pitInfo = new StringBuilder();
         if (!textureGrabed)
         {
-            mesh = modelMesh.mesh;
-            Vector3[] vertices = mesh.vertices;
-
-            // create new colors array where the colors will be created.
-            colors = new Color[vertices.Length];
-            memory.Add((Color[])colors.Clone());
-            memoryCount++;
-
+            resetColorMesh();
             textureGrabed = true;
         }
     }
@@ -114,6 +107,22 @@ public class ColorController : MonoBehaviour
             // assign the array of colors to the Mesh.
             mesh.colors = colors;
         }
+    }
+
+    public void resetColorMesh()
+    {
+        memoryCount = -1;
+        mesh = modelMesh.mesh;
+        Vector3[] vertices = mesh.vertices;
+
+        // create new colors array where the colors will be created.
+        colors = new Color[vertices.Length];
+        // create a empty memory list
+        memory = new List<Color[]>();
+        memory.Add((Color[])colors.Clone());
+        memoryCount++;
+        // assign the array of colors to the Mesh.
+        mesh.colors = colors;
     }
     
     public void setPen(bool usingPen)
@@ -220,10 +229,22 @@ public class ColorController : MonoBehaviour
             reader = new StreamReader(path);
             string readContents = reader.ReadToEnd();
             string[] lines = readContents.Split('\n');
-            for (int i =0; i<lines.Length-2; i++)
+            int l = 0;
+            int c= 0;
+            if(lines.Length<colors.Length)
             {
-                string[] array = lines[i].Split(',');
-                colors[i] = new Color(float.Parse(array[0]), float.Parse(array[1]), float.Parse(array[2]), float.Parse(array[3]));
+                l = lines.Length;
+            } else
+            {
+                l = colors.Length;
+            }
+            for (int i =0; i<l; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(lines[i]) && lines[i] != "\n" && lines[i] != "\r") {
+                    string[] array = lines[i].Split(',');
+                    colors[c] = new Color(float.Parse(array[0]), float.Parse(array[1]), float.Parse(array[2]), float.Parse(array[3]));
+                    c++;
+                }
             }
             mesh.colors = colors;
             tools.UpdateLoadLog("Finished loading");
@@ -250,4 +271,5 @@ public class ColorController : MonoBehaviour
         tools.enableLoadBTN();
         yield return null;
     }
+    //C:\Users\lemfn\Documents\GitHub\3D_Models_PIT\Builds\PITLog__2024_07_16_04_50_54.txt
 }

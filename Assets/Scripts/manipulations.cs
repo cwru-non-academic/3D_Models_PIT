@@ -57,6 +57,8 @@ public class manipulations : MonoBehaviour
     public void resetView()
     {
         currentRotation = new Vector3(0, 0, 0);
-        cameraHolder.transform.localEulerAngles = currentRotation;
+        currentPosition = new Vector3(0, 0, 0);
+        cameraHolder.transform.localEulerAngles = currentRotation; 
+        cameraView.transform.localPosition = cameraOriginalPosition + currentPosition;
     }
 }

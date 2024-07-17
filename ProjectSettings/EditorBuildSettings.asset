@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Coloring.unity
+    guid: 2a909ace526d48d4bae8c428082775d8
   m_configObjects: {}
