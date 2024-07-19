@@ -190,17 +190,8 @@ public class ColorController : MonoBehaviour
         StreamWriter file;
         try
         {
-
-            // create log file if it does not already exist. Otherwise open it for appending new trial
-            if (!File.Exists(trialLogFile))
-            {
-                trialLogFile = "PITLog_" + System.String.Format("{0:_yyyy_MM_dd_hh_mm_ss}", System.DateTime.Now) + ".txt";
-                file = new StreamWriter(trialLogFile);
-            }
-            else
-            {
-                file = File.AppendText(trialLogFile);
-            }
+            trialLogFile = "PITLog_" + System.String.Format("{0:_yyyy_MM_dd_hh_mm_ss}", System.DateTime.Now) + ".txt";
+            file = new StreamWriter(trialLogFile);
             file.WriteLine(pitInfo.ToString());
             file.Close();
             pitInfo = new StringBuilder();
