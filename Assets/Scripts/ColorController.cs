@@ -232,6 +232,7 @@ public class ColorController : MonoBehaviour
             for (int i =0; i<l; i++)
             {
                 if (!string.IsNullOrWhiteSpace(lines[i]) && lines[i] != "\n" && lines[i] != "\r") {
+                    Debug.Log(lines[i]);
                     string[] array = lines[i].Split(',');
                     colors[c] = new Color(float.Parse(array[0]), float.Parse(array[1]), float.Parse(array[2]), float.Parse(array[3]));
                     c++;
