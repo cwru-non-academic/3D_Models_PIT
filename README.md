@@ -1,6 +1,6 @@
 # Repo Specific Details
 
-An app to be used with a touchscreen mobile device to gather psychometric intensity data on 3D models like hands, feet, and other body parts.
+An app designed to gather psychometric intensity data on 3D models like hands, feet, and other body parts. Currently, only a hand model is supported. Data is saved in a CSV file format and can be modified using different software. Once analysis is complete, a file with the same format can be loaded back into the software for visualization. 
 
 # Unity Project Setup (PLEASE READ)
 
