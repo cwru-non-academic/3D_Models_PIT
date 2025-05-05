@@ -1,6 +1,6 @@
 # Repo Specific Details
 
-An app designed to gather psychometric intensity data on 3D models like hands, feet, and other body parts. Currently, only a hand model is supported. Data is saved in a CSV file format and can be modified using different software. Once analysis is complete, a file with the same format can be loaded back into the software for visualization. 
+An app designed to gather psychometric intensity data on 3D models like hands, feet, and other body parts. Currently, only a hand model is supported. Data is saved in a CSV file format and can be modified using different software. Once analysis is complete, a file with the same format can be loaded back into the software for visualization. Curently only inlcudes one hand model but you can add your own 3D models. The software uses the mesh to determine the level of detail that can be used when coloring. Higher mesh count means smaller areas of the model the user can individually color. We recomend a model with a high mesh count and an even mesh count. Traditional models have a varying mesh count to match the detail the model needs in specific areas, so we recommend using 3D modeling software to remesh the model. The current version only supports mouse and keyboard controls. 
 
 # Unity Project Setup (PLEASE READ)
 
