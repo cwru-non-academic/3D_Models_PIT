@@ -4,13 +4,11 @@ An app designed to gather psychometric intensity data on 3D models like hands, f
 
 # Unity Project Setup (PLEASE READ)
 
-Before you clone the team repo, follow these instructions:
+Before you clone the repo, follow these instructions:
 
 1. Install GitHub Desktop, which also installs Git LFS: https://desktop.github.com (if you are using git via command line, install Git LFS: https://git-lfs.com)
-2. Submit your GitHub username in the Canvas assignment that is titled “Provide your GitHub account Name”
-3. You will receive an email with permission to access your team’s GitHub repo website
-4. (for GitHub Desktop) Goto the repo website, click the green Code button, and select “Open with GitHub Desktop” and clone the template project to your local machine
-(for git command line) Go to GitHub account settings and authorize your SSH key for CWRU SSO URL (https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on) and then clone the final project template
+2. (for GitHub Desktop) Goto the repo website, click the green Code button, and select “Open with GitHub Desktop” and clone the template project to your local machine
+(for git command line) Go to GitHub account settings and authorize your SSH key for SSO URL (https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on) and then clone the final project template
 
 ## 5. Modify your GLOBAL .gitconfig
 Not everyone on your team may have the same path to UnityYAMLMerge (i.e. different operating systems or install locations). Because of this, we suggest you modify your local config to define the "unityyamlmerge" merge tool that this repository points to. To do this:
@@ -47,16 +45,3 @@ On MacOS and Linux, the pre-commit and post-merge files need to be made executab
 > chmod 755 pre-commit
 > chmod 755 post-merge
 ```
-## 7. Open the Project in Unity
-This project was created using `2021.3.0f1`. When you open this project in Unity, Unity may say that it needs to upgrade the project. Given this is a bare-bones project, this is a safe action and you may allow Unity to continue. Overall, your entire team should be using the **same version of Unity**.
-
-## 8. Starting creating your new project and commit/push changes to the team remote repo
-
-## Adding version control to an existing Unity Project
-1. Paste your project files into this repository on your local machine. 
-2. Open the project on the target unity version, so all the files are modified as necessary. 
-3. If you had unity collab or plastic, disable it now.
-4. Save your project and close unity.
-5. delete left over files from plastic or collab like x.meta.private or y.meta.private.meta (some files may be hidden so enable see hidden files)
-6. Commit and push.
-7. If you are having issues with .meta files check and modify your gitignore or make sure there are no empty folders. 
